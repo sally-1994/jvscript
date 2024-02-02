@@ -7,7 +7,26 @@ let newarray2 = array2.map(function (item) {
     
     }  
 })
+//2
+let info="good day";
+let newinfo= info.slice(4,8);
+console.log(newinfo);
 
+//3
+let value = "sring methods";
+console.log(value.length);
+
+//4
+let useranswer= prompt("საქარტველოს დედაქალაქი");
+let corectanswer ="tbilisi";
+
+let lowansver= useranswer.toLocaleLowerCase();
+
+if (lowansver=== corectanswer){
+    console.log("ok");
+}else {
+    console.log("not ok");
+}
 //5
 let fruits = ["apple","mango","avocado","kiwi"]
 let newfruits = fruits.splice(2,1,'strawberry');
@@ -85,8 +104,12 @@ let newlanguages= languages.filter(function (element) {
 })
 
 //15
-let words = ['madrid', 'rome', 'milan', 'berlin']
-let newWords = words.filter(function (item) {
-    
-    
+let words = ['Madrid', 'rome', 'Milan', 'berlin'];
+let newword = words.filter(function(item) {
+    if (item.toLowerCase().includes('m')){
+        return true;
+    }
+    return false
 })
+console.log(newword);
+
