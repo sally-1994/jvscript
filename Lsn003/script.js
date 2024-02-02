@@ -1,5 +1,5 @@
+'use strict'
 //1
-
 function sumnumbers(...numbers) {
     let numberssum=0;
     for (let item of numbers) {
