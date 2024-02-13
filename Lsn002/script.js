@@ -188,9 +188,7 @@ for (const element of array8) {
     
 }
 
-        
-
-  
+    
 
             
         
