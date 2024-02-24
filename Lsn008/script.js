@@ -49,7 +49,7 @@ let totalPage;
 
 function getusersinfo(page) {
      
-    fetch('https://reqres.in/api/unknown?page=' + page, {
+    fetch('https://reqres.in/api/users?page=' + page, {
     method: 'GET',
     })
     .then(function (response) {
@@ -67,7 +67,7 @@ function getusersinfo(page) {
     responseData.data.forEach(element => {
        
        const li = document.createElement('li');
-       li.textContent = `${element.name} ${element.color}`;
+       li.textContent = `${element.first_name} ${element.avatar}`;
        fragment.appendChild(li);
 
         
@@ -76,6 +76,16 @@ function getusersinfo(page) {
     ullist.appendChild(fragment)
 
     totalPage=responseData.total_pages;
+    if (currentPage == totalPage){
+        btnload.disabled = true;
+    } else if(currentPage < totalPage){
+        btnload.disabled = false;
+    }
+    if (currentPage===1){
+        btnloadprev.disabled = true;
+    } else if(currentPage >1){
+        btnloadprev.disabled = false;
+    }
       
     })
 
@@ -84,7 +94,7 @@ function getusersinfo(page) {
     })
 }
 btnloadprev.addEventListener('click',function () {
-        document.getElementById("loadprev").disabled = true;//საწყის მდგომარეობას ვეღარ ვაბრუნებ
+        document.getElementById("loadprev")
     if (currentPage===1){
         return;
     }
@@ -93,7 +103,7 @@ btnloadprev.addEventListener('click',function () {
     
 })
 btnload.addEventListener('click',function () {
-    document.getElementById('More').disabled = true; //საწყის მდგომარეობას ვეღარ ვაბრუნებ
+    document.getElementById('More') 
     if (currentPage ==2){
         return;
     }
