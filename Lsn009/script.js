@@ -6,33 +6,31 @@ const postoverlay = document.getElementById('overlay');
 const contentblock = document.getElementById('content');
 const overlayclose = document.getElementById('close');
 
-function ajax(url, callback) {    
-    const request = new XMLHttpRequest();
-    request.open('GET','url');
-   request.addEventListener('load', function () {
-    //console.log(this.responseText);
-        const textData = this.responseText;
-        const jsData = JSON.parse(this.responseText);
-        //console.log(jsData);
-
-        callback(jsData);
-
-       jsData.forEach(element => {
-       //  console.log(element);
-         createPost(element);
-       });
+function ajax(url,callback) {    
+    fetch(url, {
+        method: "GET",
     })
-    request.send();
+    .then((response)=>{
+        if (response.status !==200) {
+         throw "error" ;         
+        } 
+        return response.json();
+    })
+    .then((responseData)=>{
+        callback(responseData);
+    })
+    .catch((error)=> console.log(error))
 }
     
 
-ajax('https://jsonplaceholder.typicode.com/posts'){ 
+ajax('https://jsonplaceholder.typicode.com/posts',function (data) {
+    //console.log(data);
     data.forEach(element => {
-        // console.log(element);
-       createPost(element);
-     });
+        //  console.log(element);
+          createPost(element);
+        });
     
-};
+})
 
 
 function createPost(item){
@@ -51,17 +49,25 @@ function createPost(item){
         console.log(this);
         const postid = this.getAttribute('data-id');
         console.log(postid);
-        postoverlay.classList.add("activoverlay");
-
-
-        
-    })
+        postoverlay.classList.add("activoverlay"); 
+        const newUrlpost = `https://jsonplaceholder.typicode.com/posts/${postid}`;
+        ajax(newUrlpost, function (elementNew) {
+            console.log(elementNew);
+            overlaiInfo(elementNew);
+        });  
+    });
 
     divPostwraper.appendChild(divcontainer);
 
 }
 
+function overlaiInfo(item) {
+    const pdesc = document.createElement('p');
+    pdesc.innerText = item.body;
 
+    contentblock.appendChild(pdesc);
+    
+}
 overlayclose.addEventListener('click', function () {
     postoverlay.classList.remove("activoverlay");
     
