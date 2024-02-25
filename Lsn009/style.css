@@ -24,3 +24,24 @@
     color: red;
     cursor: pointer;
 }
+
+.overlay-add{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 700px;
+    background-color:lightblue;
+    display: none;
+
+}
+.add-post{
+    position: fixed;
+    top:200px;
+    right: 100px;
+    background-color: red;
+    font-size: 30px;
+}
+.overlay-add.activadd{
+    display: block;
+}

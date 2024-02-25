@@ -5,6 +5,9 @@ const divPostwraper = document.getElementById('postblock');
 const postoverlay = document.getElementById('overlay');
 const contentblock = document.getElementById('content');
 const overlayclose = document.getElementById('close');
+const btnadd =document.getElementById('add');
+const addoverlay = document.getElementById('addoverlay');
+const form = document.getElementById('form-addoverlay');
 
 function ajax(url,callback) {    
     fetch(url, {
@@ -42,8 +45,35 @@ function createPost(item){
 
     const h2post = document.createElement('h2');
     h2post.innerText = item.title;
+   
+    const deletebtn = document.createElement('button');
+    deletebtn.textContent = 'Delete Post';
+    deletebtn.setAttribute('data-id', item.id);
+
+
     divcontainer.appendChild(h1Post);
     divcontainer.appendChild(h2post);
+    divcontainer.appendChild(deletebtn);
+
+    deletebtn.addEventListener('click' ,function (e) {
+        e.stopPropagation();
+        console.log(e.target);
+        const deleteId = e.target.getAttribute('data-id');
+        console.log(deleteId);
+        const deleteUrl = `https://jsonplaceholder.typicode.com/posts/${deleteId}`
+        console.log(deleteUrl);
+
+        fetch(deleteUrl,{
+            method: "DELETE"
+        })
+        .then((response)=>response.json())
+        .then(function(deleteData){
+            console.log(deleteData);
+            divcontainer.remove();
+        });
+
+    })
+
 
     divcontainer.addEventListener('click',function () {
         console.log(this);
@@ -70,6 +100,13 @@ function overlaiInfo(item) {
 }
 overlayclose.addEventListener('click', function () {
     postoverlay.classList.remove("activoverlay");
+    contentblock.innerText = "";
+    
+})
+
+
+btnadd.addEventListener('click',function () {
+    addoverlay.classList.add('activadd');
     
 })
 
