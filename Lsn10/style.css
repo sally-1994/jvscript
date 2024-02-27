@@ -4,3 +4,44 @@
     width: 500px;
     padding: 30px;
 }
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 700px;
+    background-color: gray;
+    display: none;
+}
+
+.overlay.activoverlay{
+    display: block;
+}
+.close{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: red;
+    cursor: pointer;
+}
+
+.overlay-add{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 700px;
+    background-color:lightblue;
+    display: none;
+
+}
+.add-post{
+    position: fixed;
+    top:0;
+    left: 650px;
+    background-color: red;
+    font-size: 30px;
+}
+.overlay-add.activadd{
+    display: block;
+}
