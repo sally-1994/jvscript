@@ -127,3 +127,53 @@ form.addEventListener('submit',function (e) {
       console.log(sendedobj);
     });
 });
+
+
+const imageContainer = document.querySelector(".imag");
+let currentImage;
+
+//promisifying
+let wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+const createImgElement = function (imagePath) {
+  return new Promise(function (resolve, reject) {
+    const imgElement = document.createElement("img");
+    imgElement.src = imagePath;
+
+    imgElement.addEventListener("load", function () {
+      imageContainer.appendChild(imgElement);
+      resolve(imgElement);
+    });
+
+    imgElement.addEventListener("error", function () {
+      reject(new Error(" not found"));
+    });
+  });
+};
+
+createImgElement("images/img1.webp")
+  .then((image) => {
+    currentImage = image;
+    console.log("loaded");
+    return wait(2);
+  })
+  .then(() => {
+    currentImage.style.display = "none";
+    return createImgElement("images/img2.jpg");
+  })
+  .then((image) => {
+    currentImage = image;
+    console.log("loaded");
+    return wait(2);
+  })
+  .then(() => {
+    currentImage.style.display = "none";
+  })
+  .catch((e) => console.log(e));
+
+
+
